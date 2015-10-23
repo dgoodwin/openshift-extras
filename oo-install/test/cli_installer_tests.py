@@ -154,8 +154,6 @@ class UnattendedCliTests(OOCliFixture):
             inventory.get('OSEv3:vars', 'ansible_ssh_user'))
         self.assertEquals('openshift-enterprise',
             inventory.get('OSEv3:vars', 'deployment_type'))
-        self.assertEquals('openshift',
-            inventory.get('OSEv3:vars', 'product_type'))
 
         # Check the masters:
         self.assertEquals(1, len(inventory.items('masters')))

@@ -24,7 +24,6 @@ def generate_inventory(hosts):
     variant, ver = find_variant(CFG.settings['variant'],
         version=CFG.settings.get('variant_version', None))
     base_inventory.write('deployment_type={}\n'.format(ver.ansible_key))
-    base_inventory.write('product_type=openshift\n')
 
     if 'OO_INSTALL_DEVEL_REGISTRY' in os.environ:
         base_inventory.write('oreg_url=rcm-img-docker01.build.eng.bos.redhat.com:5001/openshift3/ose-${component}:${version}\n')
