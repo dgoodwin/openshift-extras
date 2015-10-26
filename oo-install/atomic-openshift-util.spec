@@ -42,6 +42,8 @@ Atomic OpenShift Utilities includes
 %{__python} setup.py install --skip-build --root %{buildroot}
 # Remove this line once the name change has happened
 mv -f %{buildroot}%{_bindir}/oo-install %{buildroot}%{_bindir}/atomic-openshift-installer
+mkdir -p %{buildroot}%{_datarootdir}/atomic-openshift-util/
+cp etc/ansible.cfg %{buildroot}%{_datarootdir}/atomic-openshift-util/
 
 # Uncomment once tests are working
 #%check
@@ -50,6 +52,7 @@ mv -f %{buildroot}%{_bindir}/oo-install %{buildroot}%{_bindir}/atomic-openshift-
 %files
 %{python_sitelib}/*
 %{_bindir}/atomic-openshift-installer
+%{_datarootdir}/atomic-openshift-util/ansible.cfg
 
 %changelog
 * Tue Oct 13 2015 Troy Dawson <tdawson@redhat.com> 3.0.0-1

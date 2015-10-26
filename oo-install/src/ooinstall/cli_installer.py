@@ -1,10 +1,13 @@
 import click
+import os
 import re
 import sys
 from ooinstall import install_transactions
 from ooinstall import OOConfig
 from ooinstall.oo_config import Host
 from variants import find_variant, get_variant_version_combos
+
+DEFAULT_ANSIBLE_CONFIG = '/usr/share/atomic-openshift-util/ansible.cfg'
 
 def validate_ansible_dir(ctx, param, path):
     if not path:
@@ -404,8 +407,13 @@ def main(configuration, ansible_playbook_directory, ansible_config, ansible_log_
 
     if not ansible_playbook_directory:
         ansible_playbook_directory = oo_cfg.settings.get('ansible_playbook_directory', '')
+
     if ansible_config:
         oo_cfg.settings['ansible_config'] = ansible_config
+    elif os.path.exists(DEFAULT_ANSIBLE_CONFIG):
+        # If we're installed by RPM this file should exist and we can use it as our default:
+        oo_cfg.settings['ansible_config'] = DEFAULT_ANSIBLE_CONFIG
+
     validate_ansible_dir(None, None, ansible_playbook_directory)
     oo_cfg.settings['ansible_playbook_directory'] = ansible_playbook_directory
     oo_cfg.ansible_playbook_directory = ansible_playbook_directory
