@@ -154,7 +154,7 @@ Plese confirm that they are correct before moving forward.
     notes = """
 Format:
 
-installation host,IP,public IP,hostname,public hostname
+IP,public IP,hostname,public hostname
 
 Notes:
  * The installation host is the hostname from the installer's perspective.
